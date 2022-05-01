@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suman</title>
+  </head>
+  <style>
+    body {
+      background-color: black;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #clock {
+      height: 100px;
+      width: 100px;
+      color: yellow;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-left: 50px;
+      
+    }
+  </style>
+  <body>
+    <!-- CLOCK USING HTML, CSS &JAVSCRIPT -->
+
+    <div id="clock" class="container"></div>
+
+    <script>
+      "use strict";
+
+      function Suman() {
+        let date = new Date();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+        let period = "AM";
+        if (hours == 0) {
+          hours = 12;
+        } else if (hours >= 12) {
+          hours = hours - 12;
+          period = "PM";
+        }
+        document.getElementById("clock").innerHTML =
+          hours + ":" + minutes + ":" + seconds + ":" + period;
+        setTimeout(Suman, 1000);
+      }
+      Suman();
+    </script>
+  </body>
+</html>
