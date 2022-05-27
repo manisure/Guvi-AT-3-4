@@ -1,0 +1,146 @@
+Types of NoSQL MongoDB
+----------------------
+
+1.) Document based - data is stored in a JSON or XML format. Example is MongoDB
+2.) Key-value based - stores data in form of key-value like a dictionary. Example is Redis
+3.) Column based - stores data in form of rows and column. Example is Apache Cassandra.
+4.) Graph based - It knows about theconnection of data across different nodes. Example is GraphQL
+
+DISPLAY THE LIST OF DATABASES
+-----------------------------
+show dbs;
+
+USE A DATABASE 
+--------------
+use <db_name>;
+
+DISPLAY THE LIST OF COLLECTIONS INSIDE A DATABASE
+-------------------------------------------------
+show collections;
+
+INSERT A DATA INTO A COLLECTION
+-------------------------------
+db.guvi.insert({name:'nitin',location:'delhi',email:'nitin@example.com',pincode:110012,country:'india'});
+
+insertOne()
+-----------
+db.guvi.insertOne({name:'iqbal',country:'bangladesh'});
+
+insertMany()
+------------
+db.guvi.insertMany([{name:'rakesh', location:'bangalore'}, {name:'smita',location:'chennai'}]);
+
+FIND
+----
+db.guvi.find();
+
+pretty()
+--------
+db.guvi.find().pretty();
+
+findOne()
+---------
+db.guvi.findOne({location:'bangalore'});
+
+UPDATE
+------
+db.guvi.update({name:'nitin'}, {$set:{name:'rohit sharma'}});
+
+updateMany()
+------------
+db.guvi.updateMany({location:'bangalore'}, {$set:{location:'patna'}});
+
+Projections
+-----------
+db.guvi.find({}, {name:1, location:1, _id:0})
+
+db.guvi.find({location:'patna'}, {name:1, location:1, _id:0})
+
+Note # Only those datas are displayed whose value is 1 and with 0 none is displayed.
+	   If you do not make _id:0 then _id will be displayed by default.
+
+$eq operator
+------------
+db.products.find({price:{$eq:1500}})
+
+db.products.find({price:{$eq:30}}, {name:1, price:1, _id:0})
+
+$gt operator
+------------
+db.products.find({price:{$gt:15000}})
+
+db.products.find({price:{$gt:15000}}, {name:1, price:1, _id:0})
+
+
+$lt operator
+-----------
+
+db.products.find({price:{$lt:1000}})
+
+db.products.find({price:{$lt:1000}}, {name:1, price:1, _id:0})
+
+$lte operator
+-------------
+db.products.find({price:{$lte:1000}})
+
+db.products.find({price:{$lte:1000}}, {name:1, price:1, _id:0})
+
+$gte operator
+-------------
+db.products.find({price:{$gte:1000}})
+
+db.products.find({price:{$gte:1000}}, {name:1, price:1, _id:0})
+
+$ne operator
+------------
+db.products.find({price:{$ne:15000}})
+
+db.products.find({price:{$ne:15000}}, {name:1, price:1, _id:0})
+
+$exists
+-------
+db.products.find({price:{$exists:true}})
+
+db.products.find({name:{$exists:true}}, {name:1, _id:0})
+
+$and operator
+-------------
+db.products.find({$and:[{name:'m31s'}, {price:15000}]})
+
+db.products.find({$and:[{name:'m31s'}, {price:15000}]}, {name:1, _id:0})
+
+$or operator
+------------
+db.products.find({$or:[{name:'m31s'}, {price:150000}]})
+
+db.products.find({$or:[{name:'m31s'}, {price:150000}]}, {name:1, _id:0})
+
+IMPORT CSV INTO MongoDB
+-----------------------
+mongoimport -d suman -c vegetable --type csv Book1.csv --headerline
+
+Note # Kindly use the command-prompt for importing the CSV file.
+
+EXPORT MongoDB DB To a CSV file
+-------------------------------
+
+mongoexport --collection=vegetable --db=suman --out=india.csv
+
+Note # Kindly use the command-prompt for importing the CSV file.
+
+IMPORT FROM JSON FILE 
+---------------------
+mongoimport --jsonArray --db suman --collection makeup_api_data --file makeup_api.json
+
+
+Note # Kindly use the command-prompt for importing the CSV file.
+
+EXPORT To a JSON file
+---------------------
+mongoexport --collection=makeup_api_data  --db=suman --out=suman.json
+
+Note # Kindly use the command-prompt for importing the CSV file.
+
+Limit the information flow in a collection
+------------------------------------------
+ db.makeup_api_data.find().limit(10)

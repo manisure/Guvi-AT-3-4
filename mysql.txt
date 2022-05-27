@@ -1,0 +1,227 @@
+DISPLAY ALL DATABASES
+---------------------
+
+SHOW DATABASES;
+
+CREATE A NEW DATABASES 
+----------------------
+
+CREATE DATABASE suman;
+
+USE A DATABASE
+--------------
+
+USE <database_name>;
+
+DISPLAY THE LIST OF TABLES
+--------------------------
+
+SHOW TABLES;
+
+DELETE A DATABASE
+-----------------
+
+DROP DATABASE <database_name>;
+
+
+CREATE TABLE INSIDE A DATABASE
+------------------------------
+
+CREATE TABLE student(id INT, name VARCHAR(20), mobile INT, location varchar(20));
+
+DESCRIBE A TABLE
+----------------
+
+DESCRIBE student;
+
+INSERT DATA INTO TABLE
+----------------------
+
+INSERT INTO student(id,name,mobile,location) VALUES(1,'suman gangopadhyay', 9934, 'bangalore');
+
+INSERT MULTIPLE VALUES INSIDE A TABLE
+-------------------------------------
+
+INSERT INTO student(id,name,mobile,location) VALUES(3,'priya', 3456, 'assam'), (4, 'iqbal',5678,'chennai');
+
+DISPLAY ALL DATA FROM A TABLE
+-----------------------------
+
+SELECT * FROM <table_name>;
+
+
+UPDATE DATA PRESENT IN A TABLE
+------------------------------
+
+UPDATE student SET name='tanushree' WHERE id=3;
+
+DELETE DATA FROM A TABLE
+------------------------
+
+DELETE FROM student WHERE id=3;
+
+CREATE TABLE WITH AUTO INCREMENT ID'S
+-------------------------------------
+
+CREATE TABLE trainer(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(20), track varchar(10));
+
+
+ADD COLUMNS TO AN EXISTING TABLE 
+--------------------------------
+
+ALTER TABLE student ADD email varchar(20);
+
+DELETE A COLUMN FROM AN EXISTING TABLE 
+--------------------------------------
+
+ALTER TABLE student DROP COLUMN email;
+
+
+CREATE A TABLE WITH UNIQUE COLUMNS
+----------------------------------
+
+CREATE TABLE guvi(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(20), mobile varchar(10) UNIQUE, email varchar(20) UNIQUE);
+
+NOTE # UNIQUE makes data duplication impossible on the level of database server.
+
+
+ADD UNIQUE TO AN EXISTING COLUMN
+--------------------------------
+
+ALTER TABLE trainer ADD UNIQUE(track);
+
+
+IMPORT A DATABASE INTO YOUR MySQL SERVER 
+----------------------------------------
+
+mysql -u root -p < laptop.sql
+
+NOTE # Run the command from the command-prompt not from MySQL shell.
+
+EXPORT A DATABASE FROM YOUR MySQL SERVER
+----------------------------------------
+
+mysqldump -u root -p suman > python_automation.sql
+
+NOTE # Run the command from the command-prompt not from MySQL shell.
+
+PRIMARY KEY 
+-----------
+
+Primary key is a constrain which is used to uniquely identify each record in a table.
+It should not be NULL & it should be UNIQUE.
+Each table should have only one Primary Key in it.
+And it should be the ID column.
+
+CREATE TABLE suman(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, name varchar(20), location varchar(20));
+
+ADD PRIMARY KEY TO AN EXISTING TABLE
+------------------------------------
+
+ALTER TABLE customer ADD PRIMARY LEY(ID);
+
+
+DELETE A PRIMARY KEY FROM A TABLE
+---------------------------------
+
+ALTER TABLE customer DROP PRIMARY KEY;
+
+
+FOREIGN KEY 
+-----------
+
+Foreign Key is a column in one table which refers to the PRIMARY KEY in another table.
+
+The table with PRIMARY KEY is called the parent table.
+
+The table with FOREIGN KEY is called the child table.
+
+CREATE TABLE orders(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, order_number INT, customer_id INT, FOREIGN KEY(customer_id) REFERENCES suman(id));
+
+JOINS
+-----
+
+A join is a process through which we can fetch data from two or more tables.
+
+For Joins we need Primary Key and Foreign Key.
+
+insert into customer (name,location) values('suman', 'bangalore');
+insert into customer (name,location) values('nitin', 'delhi');
+insert into customer (name,location) values('nachi', 'chennai');
+insert into customer (name,location) values('iqbal', 'dhaka');
+insert into customer (name,location) values('tanushree', 'hyderabad');
+
+insert into orders(order_number, customer_id) values(101, 1);
+insert into orders(order_number, customer_id) values(201, 4);
+insert into orders(order_number, customer_id) values(301, 5);
+insert into orders(order_number, customer_id) values(524, 15);
+insert into orders(order_number, customer_id) values(654, 89);
+
+INNER JOINS
+-----------
+
+SELECT customer.name, customer.location, orders.order_number FROM customer INNER JOIN orders ON customer.id=orders.customer_id;
+
+
+
+LEFT JOIN
+---------
+
+It is a kind of JOIN which will give us information from LEFT TABLE and those which are mathing from the RIGHT TABLE Only.
+
+SELECT customer.id, customer.name, customer.location FROM customer LEFT JOIN orders ON customer.id=orders.customer_id;
+
+
+RIGHT JOIN
+----------
+
+It is  a kind of JOIN which gives us information from RIGHT TABLE and those which are matching from the LEFT TABLE only
+
+SELECT customer.id, customer.name, customer.location FROM customer RIGHT JOIN orders ON customer.id=orders.customer_id;
+
+CROSS JOIN
+----------
+
+It will give me the information from two tables as M*N ways
+
+The data maybe humongous so be cautious with your command.
+
+SELECT customer.name, customer.id, customer.location, orders.customer_id FROM customer CROSS JOIN orders;
+
+To make your CROSS JOIN an INNER JOIN use the WHERE clause.
+
+SELECT customer.name, customer.id, customer.location, orders.customer_id FROM customer CROSS JOIN orders WHERE customer.id=orders.customer_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
