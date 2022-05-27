@@ -191,37 +191,3 @@ SELECT customer.name, customer.id, customer.location, orders.customer_id FROM cu
 To make your CROSS JOIN an INNER JOIN use the WHERE clause.
 
 SELECT customer.name, customer.id, customer.location, orders.customer_id FROM customer CROSS JOIN orders WHERE customer.id=orders.customer_id;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
