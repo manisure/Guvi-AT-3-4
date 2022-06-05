@@ -28,14 +28,29 @@ class Suman:
         except:
             print('ERROR : CLASS not found !')
 
+    # use of XPATH selector
+    def XPATH_Usage(self,xpath_id, url):
+        try:
+            self.driver.get(url)
+            xpath_id = self.driver.find_element(by=By.XPATH, value=xpath_id)
+            if xpath_id:
+                time.sleep(5)
+                xpath_id.click()
+        except:
+            print("ERROR : XPATH not found !")
+
 s = Suman()
 
-url = "https://www.w3schools.com/"
+url = "https://www.guvi.in/"
 
 id_1 = "w3loginbtn"
 
 class_1 = "w3-hover-text-green"
 
-s.Class_Usage(class_1,url)
+xpath_1  = "/html/body/header/nav/div/div/div[2]/div[2]/ul/li[1]/a"
+
+s.XPATH_Usage(xpath_1, url)
+
+# s.Class_Usage(class_1,url)
 
 # s.ID_Usage(id_1,url)
